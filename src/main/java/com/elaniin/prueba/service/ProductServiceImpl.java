@@ -43,9 +43,9 @@ public class ProductServiceImpl implements ProductServices{
     }
 
     @Override
-    public List<Producto> allProducto(String title) {
+    public List<Producto> allProducto(String param) {
         List<Producto> producto=new ArrayList<>();
-        for (Producto meeting:productRepository.findByTitleLike(title)) {
+        for (Producto meeting:productRepository.findByParamLike(param.toUpperCase())) {
             producto.add(meeting);
         }
         return producto;

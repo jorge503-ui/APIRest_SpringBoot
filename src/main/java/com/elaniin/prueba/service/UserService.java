@@ -18,4 +18,5 @@ public interface UserService {
     List<Usuario> allUsuario();
     List<Usuario> allUsuario(String title);
     void deleteUsuario(Integer id);
+    Usuario findByEmail(String email);
 }

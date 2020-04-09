@@ -30,17 +30,17 @@ public class UserServiceImpl implements UserDetailsService, UserService{
     private UserRepository userRepository;
     
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario user = userRepository.findOneByMail(username).get();
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario user = userRepository.findOneByMail(email).get();
 		if(user == null){
 			throw new UsernameNotFoundException("Correo o contraseña invalida");
 		}
-		return new User(user.getUsername().toString(), user.getPassword().toString(), getAuthority(user));
+		return new User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
     private Set<SimpleGrantedAuthority> getAuthority(Usuario user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + Arrays.toString(user.getUsername())));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADM"));
 
 	return authorities;
     }
@@ -81,6 +81,12 @@ public class UserServiceImpl implements UserDetailsService, UserService{
     @Override
     public List<Usuario> allUsuario(String title) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario findByEmail(String email) {
+        Usuario user = userRepository.findOneByMail(email).get();
+	return user;
     }
     
 }

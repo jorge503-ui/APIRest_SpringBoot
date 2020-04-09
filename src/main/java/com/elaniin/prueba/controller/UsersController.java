@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 /**
  *
  * @author Jorgep503
@@ -29,6 +31,8 @@ public class UsersController extends BaseRestController{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JavaMailSender mailSender;
     /**
      * Add a new usuarios endpoint
      * @param usuarios
@@ -77,6 +81,34 @@ public class UsersController extends BaseRestController{
         Map<String, Object> hasmap = new HashMap<String, Object>();
         hasmap.put("status",true);
         hasmap.put("message","Usuario deleted successfully");
+        return generateResponseOk(hasmap);
+    }
+    
+    /**
+    * Recuperacion de contraseña
+    * @param email
+    * @return 
+    */
+    @GetMapping(value = "usuarios/recuperarcontrasenia/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ADM')")
+    public ResponseEntity<?> allUsuario(@PathVariable(name = "email") String email) {
+        Map<String, Object> hasmap = new HashMap<String, Object>();
+        SimpleMailMessage emailMessage = new SimpleMailMessage();
+        Usuario usuario = new Usuario();
+        usuario = userService.findByEmail(email);
+        if(usuario != null){
+            emailMessage.setTo(email);
+            emailMessage.setSubject("Recuperacion de contrasenia");
+            emailMessage.setText("Ingrese a este link para recuperar su contrasenia:\n"
+                    + "http://localhost:8080/recuperarcontrasenia/123456");
+            mailSender.send(emailMessage);
+            hasmap.put("status",true);
+            hasmap.put("message","Revise su correo, link enviado para recuperar contrasenia con vigencia de 15 minutos");
+        }else{
+            hasmap.put("status",false);
+            hasmap.put("message","Usuario no encontrado");
+        }
         return generateResponseOk(hasmap);
     }
 

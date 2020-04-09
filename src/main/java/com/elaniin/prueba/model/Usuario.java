@@ -12,13 +12,13 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,8 +31,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
     @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono"),
-    @NamedQuery(name = "Usuario.findByFechanacimiento", query = "SELECT u FROM Usuario u WHERE u.fechanacimiento = :fechanacimiento")})
+    @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
+    @NamedQuery(name = "Usuario.findByFechanacimiento", query = "SELECT u FROM Usuario u WHERE u.fechanacimiento = :fechanacimiento"),
+    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
+    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,23 +45,24 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(name = "ID")
     private Long id;
-    @Lob
+    @Size(max = 150)
     @Column(name = "NOMBRE")
-    private byte[] nombre;
+    private String nombre;
     @Column(name = "TELEFONO")
     private BigInteger telefono;
+    @Size(max = 50)
+    @Column(name = "USERNAME")
+    private String username;
     @Column(name = "FECHANACIMIENTO")
     @Temporal(TemporalType.DATE)
     private Date fechanacimiento;
-    @Lob
-    @Column(name = "USERNAME")
-    private byte[] username;
-    @Lob
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 50)
     @Column(name = "EMAIL")
-    private byte[] email;
-    @Lob
+    private String email;
+    @Size(max = 50)
     @Column(name = "PASSWORD")
-    private byte[] password;
+    private String password;
 
     public Usuario() {
     }
@@ -74,11 +79,11 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public byte[] getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(byte[] nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -90,6 +95,14 @@ public class Usuario implements Serializable {
         this.telefono = telefono;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Date getFechanacimiento() {
         return fechanacimiento;
     }
@@ -98,27 +111,19 @@ public class Usuario implements Serializable {
         this.fechanacimiento = fechanacimiento;
     }
 
-    public byte[] getUsername() {
-        return username;
-    }
-
-    public void setUsername(byte[] username) {
-        this.username = username;
-    }
-
-    public byte[] getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(byte[] email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

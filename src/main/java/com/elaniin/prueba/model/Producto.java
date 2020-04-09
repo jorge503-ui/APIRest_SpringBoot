@@ -6,15 +6,14 @@
 package com.elaniin.prueba.model;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.math.BigDecimal;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,38 +26,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
-    @NamedQuery(name = "Producto.findById", query = "SELECT p FROM Producto p WHERE p.id = :id"),
-    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
-    @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio")})
+    @NamedQuery(name = "Producto.findById", query = "SELECT p FROM Producto p WHERE p.productoPK.id = :id"),
+    @NamedQuery(name = "Producto.findBySku", query = "SELECT p FROM Producto p WHERE p.sku = :sku"),
+    @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
+    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.productoPK.cantidad = :cantidad"),
+    @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio"),
+    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID")
-    private Long id;
-    @Basic(optional = false)
-    @NotNull
-    @Lob
+    @EmbeddedId
+    protected ProductoPK productoPK;
+    @Size(max = 50)
     @Column(name = "SKU")
-    private byte[] sku;
-    @Basic(optional = false)
-    @NotNull
-    @Lob
+    private String sku;
+    @Size(max = 150)
     @Column(name = "NOMBRE")
-    private byte[] nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CANTIDAD")
-    private int cantidad;
-    @Basic(optional = false)
-    @NotNull
+    private String nombre;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PRECIO")
-    private int precio;
-    @Lob
+    private BigDecimal precio;
+    @Size(max = 300)
     @Column(name = "DESCRIPCION")
-    private byte[] descripcion;
+    private String descripcion;
     @Lob
     @Size(max = 32700)
     @Column(name = "IMAGEN")
@@ -67,63 +57,51 @@ public class Producto implements Serializable {
     public Producto() {
     }
 
-    public Producto(Long id) {
-        this.id = id;
+    public Producto(ProductoPK productoPK) {
+        this.productoPK = productoPK;
     }
 
-    public Producto(Long id, byte[] sku, byte[] nombre, int cantidad, int precio) {
-        this.id = id;
-        this.sku = sku;
-        this.nombre = nombre;
-        this.cantidad = cantidad;
-        this.precio = precio;
+    public Producto(long id, int cantidad) {
+        this.productoPK = new ProductoPK(id, cantidad);
     }
 
-    public Long getId() {
-        return id;
+    public ProductoPK getProductoPK() {
+        return productoPK;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setProductoPK(ProductoPK productoPK) {
+        this.productoPK = productoPK;
     }
 
-    public byte[] getSku() {
+    public String getSku() {
         return sku;
     }
 
-    public void setSku(byte[] sku) {
+    public void setSku(String sku) {
         this.sku = sku;
     }
 
-    public byte[] getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(byte[] nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public int getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
-    public byte[] getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(byte[] descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -138,7 +116,7 @@ public class Producto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (productoPK != null ? productoPK.hashCode() : 0);
         return hash;
     }
 
@@ -149,7 +127,7 @@ public class Producto implements Serializable {
             return false;
         }
         Producto other = (Producto) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.productoPK == null && other.productoPK != null) || (this.productoPK != null && !this.productoPK.equals(other.productoPK))) {
             return false;
         }
         return true;
@@ -157,7 +135,7 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "com.elaniin.prueba.model.Producto[ id=" + id + " ]";
+        return "com.elaniin.prueba.model.Producto[ productoPK=" + productoPK + " ]";
     }
     
 }

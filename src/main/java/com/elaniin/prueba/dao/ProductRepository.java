@@ -17,6 +17,6 @@ import java.util.List;
  */
 public interface ProductRepository extends CrudRepository<Producto, Integer>{
     
-    @Query("SELECT m FROM producto m WHERE m.nombre LIKE %:title%")
-    List<Producto> findByTitleLike(@Param("title") String title);
+    @Query("SELECT p FROM Producto p WHERE upper(p.nombre) LIKE %:parametro% or upper(p.sku) LIKE %:parametro%" )
+    List<Producto> findByParamLike(@Param("Parametro") String parametro);
 }
