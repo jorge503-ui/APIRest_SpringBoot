@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.productoPK.cantidad = :cantidad"),
     @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio"),
-    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion")})
+    @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
+    @NamedQuery(name = "Producto.findByParamLike", query = "SELECT p FROM Producto p WHERE upper(p.nombre) LIKE '%:parametro%' or upper(p.sku) LIKE '%:parametro%'")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;

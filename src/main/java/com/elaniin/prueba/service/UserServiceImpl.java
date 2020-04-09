@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserDetailsService, UserService{
     
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario user = userRepository.findOneByMail(email).get();
+        Usuario user = userRepository.findByEmail(email).get();
 		if(user == null){
 			throw new UsernameNotFoundException("Correo o contraseña invalida");
 		}
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserDetailsService, UserService{
 
     @Override
     public Usuario findByEmail(String email) {
-        Usuario user = userRepository.findOneByMail(email).get();
+        Usuario user = userRepository.findByEmail(email).get();
 	return user;
     }
     
