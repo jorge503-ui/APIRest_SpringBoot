@@ -19,7 +19,7 @@ Es por medio de POST, se puede acceder por
 #### Input
 ```
 {
-    "username":"jorge.p.391@gmail.com",
+    "mail":"jorge.p.391@gmail.com",
     "password":"PruebaPassword"
 }
 ```
