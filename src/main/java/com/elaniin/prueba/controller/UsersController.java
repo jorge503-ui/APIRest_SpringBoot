@@ -80,7 +80,7 @@ public class UsersController extends BaseRestController{
         userService.deleteUsuario(id);
         Map<String, Object> hasmap = new HashMap<String, Object>();
         hasmap.put("status",true);
-        hasmap.put("message","Usuario deleted successfully");
+        hasmap.put("message","Usuario eliminado exitosamente");
         return generateResponseOk(hasmap);
     }
     
@@ -89,10 +89,10 @@ public class UsersController extends BaseRestController{
     * @param email
     * @return 
     */
-    @GetMapping(value = "usuarios/recuperarcontrasenia/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "usuarios/recuperarcontrasenia/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
-    public ResponseEntity<?> allUsuario(@PathVariable(name = "email") String email) {
+    public ResponseEntity<?> recuperarContrasenia(@PathVariable(name = "email") String email) {
         Map<String, Object> hasmap = new HashMap<String, Object>();
         SimpleMailMessage emailMessage = new SimpleMailMessage();
         Usuario usuario = new Usuario();
@@ -104,7 +104,7 @@ public class UsersController extends BaseRestController{
                     + "http://localhost:8080/recuperarcontrasenia/123456");
             mailSender.send(emailMessage);
             hasmap.put("status",true);
-            hasmap.put("message","Revise su correo, link enviado para recuperar contrasenia con vigencia de 15 minutos");
+            hasmap.put("message","Correo envia exitosamente.");
         }else{
             hasmap.put("status",false);
             hasmap.put("message","Usuario no encontrado");
