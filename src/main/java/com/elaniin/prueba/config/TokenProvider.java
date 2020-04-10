@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
  */
 @Component
 public class TokenProvider implements Serializable{
-    @Value("${jwt.secret}")
-    private String SIGNING_KEY;
-    @Value("${jwt.authorities-key}")
-    private  String AUTHORITIES_KEY ;
-    @Value("${jwt.expiration}")
-    private long ACCESS_TOKEN_VALIDITY_SECONDS;
+    //@Value("${jwt.secret}")
+    private final String SIGNING_KEY="myKeySecret";
+    //@Value("${jwt.authorities-key}")
+    private final  String AUTHORITIES_KEY ="scopes";
+    //@Value("${jwt.expiration}")
+    private final long ACCESS_TOKEN_VALIDITY_SECONDS=604800;
 
     public String getMailFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

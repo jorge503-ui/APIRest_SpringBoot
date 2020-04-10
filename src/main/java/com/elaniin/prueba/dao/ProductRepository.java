@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface ProductRepository extends CrudRepository<Producto, Integer>{
     
-    List<Producto> findByParamLike(@Param("Parametro") String parametro);
+    List<Producto> findByParamLike(@Param("parametro") String parametro);
 }

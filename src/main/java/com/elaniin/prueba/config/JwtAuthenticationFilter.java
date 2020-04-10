@@ -33,10 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
     @Autowired
     private TokenProvider jwtTokenUtil;
-    @Value("${jwt.header}")
-    public  String HEADER_STRING;
-    @Value("${jwt.prefix}")
-    public  String TOKEN_PREFIX;
+    //@Value("${jwt.header}")
+    public  String HEADER_STRING= "Authorization";
+    //@Value("${jwt.prefix}")
+    public  String TOKEN_PREFIX="Bearer ";
     
     @Override
     protected void doFilterInternal(HttpServletRequest hsr, HttpServletResponse hsr1, FilterChain fc) throws ServletException, IOException {
