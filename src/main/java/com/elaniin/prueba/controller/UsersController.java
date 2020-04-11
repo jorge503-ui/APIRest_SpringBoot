@@ -10,11 +10,7 @@ import com.elaniin.prueba.helper.BaseRestController;
 import com.elaniin.prueba.helper.Utilidades;
 import com.elaniin.prueba.model.Usuario;
 import com.elaniin.prueba.service.UserService;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import java.sql.SQLException;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +45,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Add a new usuarios endpoint
-     *
      * @param user
      * @return
      */
@@ -79,7 +74,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Update a usuarios
-     *
      * @param user
      * @return
      */
@@ -108,7 +102,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Return all data
-     *
      * @param page
      * @param limit
      * @return
@@ -123,7 +116,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Delete a specific Usuarios
-     *
      * @param id
      * @return
      */
@@ -140,7 +132,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Recuperacion de contraseña
-     *
      * @param email
      * @return
      */
@@ -171,7 +162,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Validacion de link
-     *
      * @param token
      * @return
      */
@@ -194,7 +184,6 @@ public class UsersController extends BaseRestController {
 
     /**
      * Reset de contraseña
-     *
      * @param token
      * @param contrasenia
      * @return
