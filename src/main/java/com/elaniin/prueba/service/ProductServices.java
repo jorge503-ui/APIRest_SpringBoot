@@ -15,7 +15,9 @@ public interface ProductServices {
     Producto addProducto(Producto producto);
     Producto updateProducto(Producto producto);
     List<Producto> allProducto();
-    List<Producto> allProducto(String title);
+    List<Producto> findProductoByNombreAndSku(String nombre, String SKU);
     void deleteProducto(Integer id);
     List<Producto> allProducto(int page, int limit);
+    List<Producto> allProductoBySKU(String SKU);
+    List<Producto> allProductoByNombre(String nombre);
 }

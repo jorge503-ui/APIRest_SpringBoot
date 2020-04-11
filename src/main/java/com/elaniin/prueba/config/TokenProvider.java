@@ -6,7 +6,6 @@
 package com.elaniin.prueba.config;
 
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,18 +19,20 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 /**
  *
  * @author Jorgep503
  */
 @Component
-public class TokenProvider implements Serializable{
+public class TokenProvider implements Serializable {
+
     //@Value("${jwt.secret}")
-    private final String SIGNING_KEY="myKeySecret";
+    private final String SIGNING_KEY = "myKeySecret";
     //@Value("${jwt.authorities-key}")
-    private final  String AUTHORITIES_KEY ="scopes";
+    private final String AUTHORITIES_KEY = "scopes";
     //@Value("${jwt.expiration}")
-    private final long ACCESS_TOKEN_VALIDITY_SECONDS=604800;
+    private final long ACCESS_TOKEN_VALIDITY_SECONDS = 604800;
 
     public String getMailFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -67,15 +68,18 @@ public class TokenProvider implements Serializable{
                 .claim(AUTHORITIES_KEY, authorities)
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
                 .compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String mail = getMailFromToken(token);
-        return (
-              mail.equals(userDetails.getUsername())
-                    && !isTokenExpired(token));
+        return (mail.equals(userDetails.getUsername())
+                && !isTokenExpired(token));
+    }
+
+    public Boolean validateToken(String token) {
+        return !isTokenExpired(token);
     }
 
     UsernamePasswordAuthenticationToken getAuthentication(final String token, final Authentication existingAuth, final UserDetails userDetails) {
@@ -84,11 +88,38 @@ public class TokenProvider implements Serializable{
         final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
         final Claims claims = claimsJws.getBody();
 
-        final Collection<? extends GrantedAuthority> authorities =
-                Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+        final Collection<? extends GrantedAuthority> authorities
+                = Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+    }
+
+    public String generateToken(String mail) {
+        try {
+            //Generate tokenJWT
+            JwtBuilder tokenJWT = Jwts.builder()
+                    .setSubject(mail)
+                    .setExpiration(new Date(System.currentTimeMillis() + 900000))
+                    .signWith(SignatureAlgorithm.HS512, SIGNING_KEY )
+                    ;
+            //Compact the tokenJWT + save the value in tokenJWTString
+            String tokenJWTString = tokenJWT.compact();
+            //Response to Request from Controller
+            return tokenJWTString;
+
+        } catch (Exception e) {
+            return "Error creating the token JWT";
+        }
+    }
+    
+    public boolean validateTokenLink(String token){
+        final JwtParser jwtParser = Jwts.parser().setSigningKey(SIGNING_KEY);
+        final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
+        final Claims claims = claimsJws.getBody();
+        final Date expiration = claims.getExpiration();
+        
+        return expiration.before(new Date());
     }
 }

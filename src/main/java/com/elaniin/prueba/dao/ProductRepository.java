@@ -9,6 +9,7 @@ import com.elaniin.prueba.model.Producto;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  *
@@ -16,5 +17,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface ProductRepository extends PagingAndSortingRepository<Producto, Long>{
     
-    List<Producto> findByParamLike(@Param("parametro") String parametro);
+    @Query("SELECT p FROM Producto p WHERE UPPER(p.nombre) LIKE %?1% and UPPER(p.sku) LIKE %?2%")
+    List<Producto> findProductoByNombreAndSku(String nombre, String sku);
+    List<Producto> findByNombreContainingIgnoreCase(String nombre);
+    List<Producto> findBySkuContainingIgnoreCase(String sku);
 }

@@ -16,7 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 /**
@@ -103,6 +102,31 @@ public class ProductsController extends BaseRestController{
         hasmap.put("message","Produto eliminado exitosamente");
         return generateResponseOk(hasmap);
     }
+    /**
+     * Return all data
+     * @param nombre
+     * @param sku
+     * @return
+     */
+    @GetMapping(value = "produtos/filter", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @PreAuthorize("hasRole('ADM')")
+    public ResponseEntity<?> allProductosFilter(@RequestParam(value = "nombre", defaultValue = "") String nombre,
+            @RequestParam(value = "sku", defaultValue = "") String sku) {
+        System.out.println("nombre "+nombre+" sku "+sku);
+        if(!sku.equals("") && !nombre.equals("")){
+            return generateResponseOk(productServices.findProductoByNombreAndSku(nombre, sku));
+        }else if(!sku.equals("")){
+            return generateResponseOk(productServices.allProductoBySKU(sku));
+        }else if(!nombre.equals("")){
+            return generateResponseOk(productServices.allProductoByNombre(nombre));
+        }
+        Map<String, Object> hasmap = new HashMap<>();
+        hasmap.put("status",false);
+        hasmap.put("message","Ingese un parametro de busqueda");
+        return generateResponseOk(hasmap);
+    }
+    
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity handleEntityNotFoundException(EntityNotFoundException ex) {

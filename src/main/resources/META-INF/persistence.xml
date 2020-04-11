@@ -5,10 +5,10 @@
     <class>com.elaniin.prueba.model.Usuario</class>
     <class>com.elaniin.prueba.model.Producto</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://remotemysql.com:3306/cPvkQ1lTKU?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-      <property name="javax.persistence.jdbc.user" value="cPvkQ1lTKU"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://sql9.freesqldatabase.com:3306/sql9332796?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="sql9332796"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="mvvcnixfCO"/>
+      <property name="javax.persistence.jdbc.password" value="6qbJHw9hmh"/>
     </properties>
   </persistence-unit>
 </persistence>

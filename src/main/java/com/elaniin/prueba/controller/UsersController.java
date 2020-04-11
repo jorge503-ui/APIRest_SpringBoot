@@ -5,13 +5,16 @@
  */
 package com.elaniin.prueba.controller;
 
+import com.elaniin.prueba.config.TokenProvider;
 import com.elaniin.prueba.helper.BaseRestController;
 import com.elaniin.prueba.helper.Utilidades;
 import com.elaniin.prueba.model.Usuario;
 import com.elaniin.prueba.service.UserService;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,28 +23,33 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+
 /**
  *
- * @author Jorgep503
- * endpoints for users CRUD
+ * @author Jorgep503 endpoints for users CRUD
  */
 @RestController
 @RequestMapping
-public class UsersController extends BaseRestController{
+public class UsersController extends BaseRestController {
+
     @Autowired
     private UserService userService;
 
     @Autowired
+    private TokenProvider jwtTokenUtil;
+
+    @Autowired
     private JavaMailSender mailSender;
-    
+
     Utilidades utils = new Utilidades();
+
     /**
      * Add a new usuarios endpoint
+     *
      * @param user
      * @return
      */
@@ -71,6 +79,7 @@ public class UsersController extends BaseRestController{
 
     /**
      * Update a usuarios
+     *
      * @param user
      * @return
      */
@@ -99,6 +108,7 @@ public class UsersController extends BaseRestController{
 
     /**
      * Return all data
+     *
      * @param page
      * @param limit
      * @return
@@ -113,6 +123,7 @@ public class UsersController extends BaseRestController{
 
     /**
      * Delete a specific Usuarios
+     *
      * @param id
      * @return
      */
@@ -122,35 +133,88 @@ public class UsersController extends BaseRestController{
     public ResponseEntity<?> deleteUsuarios(@PathVariable(name = "id") int id) {
         userService.deleteUsuario(id);
         Map<String, Object> hasmap = new HashMap<>();
-        hasmap.put("status",true);
-        hasmap.put("message","Usuario eliminado exitosamente");
+        hasmap.put("status", true);
+        hasmap.put("message", "Usuario eliminado exitosamente");
         return generateResponseOk(hasmap);
     }
-    
+
     /**
-    * Recuperacion de contraseña
-    * @param email
-    * @return 
-    */
-    @PostMapping(value = "usuarios/recuperarcontrasenia/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+     * Recuperacion de contraseña
+     *
+     * @param email
+     * @return
+     */
+    @PostMapping(value = "recuperarcontrasenia/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    @PreAuthorize("hasRole('ADM')")
-    public ResponseEntity<?> recuperarContrasenia(@PathVariable(name = "email") String email) {
+    public ResponseEntity<?> recuperarContrasenia(@RequestParam(name = "email") String email) {
         Map<String, Object> hasmap = new HashMap<>();
+        String token;
+
         SimpleMailMessage emailMessage = new SimpleMailMessage();
         Usuario usuario = new Usuario();
         usuario = userService.findByEmail(email);
-        if(usuario != null){
+        if (usuario != null) {
+            token = jwtTokenUtil.generateToken(email);
             emailMessage.setTo(email);
             emailMessage.setSubject("Recuperacion de contrasenia");
             emailMessage.setText("Ingrese a este link para recuperar su contrasenia:\n"
-                    + "http://localhost:8080/recuperarcontrasenia/123456");
+                    + "http://localhost:8080/confirmarcontrasenia/?token=" + token);
             mailSender.send(emailMessage);
-            hasmap.put("status",true);
-            hasmap.put("message","Correo envia exitosamente.");
-        }else{
-            hasmap.put("status",false);
-            hasmap.put("message","Usuario no encontrado");
+            hasmap.put("status", true);
+            hasmap.put("message", "Correo envia exitosamente.");
+        } else {
+            hasmap.put("status", false);
+            hasmap.put("message", "Usuario no encontrado");
+        }
+        return generateResponseOk(hasmap);
+    }
+
+    /**
+     * Validacion de link
+     *
+     * @param token
+     * @return
+     */
+    @GetMapping(value = "confirmarcontrasenia/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<?> confirmarContrasenia(@RequestParam(name = "token") String token) {
+        Map<String, Object> hasmap = new HashMap<>();
+        try{
+            if (jwtTokenUtil.validateToken(token)) {
+                hasmap.put("status", true);
+                hasmap.put("message", "Token valido");
+            }
+        } catch(Exception e) {
+            hasmap.put("status", false);
+            hasmap.put("message", "Token ha expirado");
+        }
+        return generateResponseOk(hasmap);
+    }
+
+    /**
+     * Reset de contraseña
+     *
+     * @param token
+     * @param contrasenia
+     * @return
+     */
+    @PostMapping(value = "resetcontrasenia/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<?> confirmarContrasenia(@RequestParam(name = "token") String token, @RequestParam(name = "contrasenia") String contrasenia) {
+        Map<String, Object> hasmap = new HashMap<>();
+        try{
+        if (jwtTokenUtil.validateToken(token)) {
+            Usuario user = userService.findByEmail(jwtTokenUtil.getMailFromToken(token));
+            user.setPassword(contrasenia);
+            userService.updateUsuario(user);
+            hasmap.put("status", true);
+            hasmap.put("message", "Contraseña actualizada exitosamente");
+        }
+        } catch(Exception e) {
+            hasmap.put("status", false);
+            hasmap.put("message", "Token ha expirado");
         }
         return generateResponseOk(hasmap);
     }
@@ -164,4 +228,6 @@ public class UsersController extends BaseRestController{
     public ResponseEntity handleException(EntityNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    
 }

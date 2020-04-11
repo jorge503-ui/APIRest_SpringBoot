@@ -46,9 +46,9 @@ public class ProductServiceImpl implements ProductServices{
     }
 
     @Override
-    public List<Producto> allProducto(String param) {
+    public List<Producto> findProductoByNombreAndSku(String nombre, String SKU) {
         List<Producto> producto=new ArrayList<>();
-        for (Producto meeting:productRepository.findByParamLike(param.toUpperCase())) {
+        for (Producto meeting : productRepository.findProductoByNombreAndSku(nombre.toUpperCase(),SKU.toUpperCase())) {
             producto.add(meeting);
         }
         return producto;
@@ -65,6 +65,16 @@ public class ProductServiceImpl implements ProductServices{
         Page<Producto> productos = productRepository.findAll(pageableRequest);
         List<Producto> productEntities = productos.getContent();
         return productEntities;
+    }
+
+    @Override
+    public List<Producto> allProductoBySKU(String SKU) {
+        return productRepository.findBySkuContainingIgnoreCase(SKU.toUpperCase());
+    }
+
+    @Override
+    public List<Producto> allProductoByNombre(String nombre) {
+        return productRepository.findByNombreContainingIgnoreCase(nombre.toUpperCase());
     }
     
 }
