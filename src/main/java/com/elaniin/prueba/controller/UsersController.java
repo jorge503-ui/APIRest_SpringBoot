@@ -87,7 +87,7 @@ public class UsersController extends BaseRestController {
             if (utils.isNumeric(user.getTelefono())) {
                 generateResponseOk(userService.updateUsuario(user));
                 hasmap.put("status", true);
-                hasmap.put("message", "Usuario agregado exitosamente");
+                hasmap.put("message", "Usuario actualizado exitosamente");
             } else {
                 hasmap.put("status", false);
                 hasmap.put("message", "Telefono no valido, debe ser numerico");

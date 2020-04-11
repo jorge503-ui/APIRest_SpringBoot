@@ -64,7 +64,7 @@ public class ProductsController extends BaseRestController{
         if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad() != 0 && produto.getPrecio() != 0.0){
             generateResponseOk(productServices.updateProducto(produto));
             hasmap.put("status", true);
-            hasmap.put("message", "Producto agregado exitosamente");
+            hasmap.put("message", "Producto actualizado exitosamente");
         }else{
             hasmap.put("status", false);
             hasmap.put("message", "Hay campos obligatorios vacios, favor validar.");

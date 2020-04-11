@@ -1,0 +1,304 @@
+{
+    "id": "d3659209-6bf4-4c8d-b712-3a64c5937fe9",
+    "name": "PruebaElaniin",
+    "timestamp": "2020-04-11T23:42:38.542Z",
+    "collection_id": "f6948c47-15ce-4e9d-bc33-e63318a04929",
+    "folder_id": 0,
+    "environment_id": "0",
+    "totalPass": 0,
+    "totalFail": 0,
+    "results": [
+        {
+            "id": "ed3da552-4384-44c1-9a7e-880c83b73b1f",
+            "name": "https://app-pruebaelaniin.herokuapp.com/login",
+            "url": "https://app-pruebaelaniin.herokuapp.com/login",
+            "time": 266,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                266
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "c447cebf-0109-407b-8e27-1898e18257e3",
+            "name": "https://app-pruebaelaniin.herokuapp.com/usuarios?limit=2&page=0",
+            "url": "https://app-pruebaelaniin.herokuapp.com/usuarios?limit=2&page=0",
+            "time": 144,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                144
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "8677f0a6-a62a-46b2-b600-5e1aec304fa7",
+            "name": "https://app-pruebaelaniin.herokuapp.com/usuarios/",
+            "url": "https://app-pruebaelaniin.herokuapp.com/usuarios/",
+            "time": 147,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                147
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "69f18185-de4e-4a23-ab1b-3bb00593cd9c",
+            "name": "https://app-pruebaelaniin.herokuapp.com/usuarios",
+            "url": "https://app-pruebaelaniin.herokuapp.com/usuarios",
+            "time": 208,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                208
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "4479839c-9cc1-4f94-ba35-bae7c940e6f1",
+            "name": "https://app-pruebaelaniin.herokuapp.com/usuarios/15",
+            "url": "https://app-pruebaelaniin.herokuapp.com/usuarios/15",
+            "time": 137,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                137
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "c02282ff-f80d-4402-8532-b936379be375",
+            "name": "https://app-pruebaelaniin.herokuapp.com/produtos?page=0&limit=10",
+            "url": "https://app-pruebaelaniin.herokuapp.com/produtos?page=0&limit=10",
+            "time": 138,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                138
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "ec89822d-d665-4372-b962-c10c221b550d",
+            "name": "https://app-pruebaelaniin.herokuapp.com/produtos",
+            "url": "https://app-pruebaelaniin.herokuapp.com/produtos",
+            "time": 163,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                163
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "64878ade-f77f-4a3d-8e77-0e049618723f",
+            "name": "https://app-pruebaelaniin.herokuapp.com/produtos",
+            "url": "https://app-pruebaelaniin.herokuapp.com/produtos",
+            "time": 137,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                137
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "c7f5964e-258e-47e2-912d-0e513c0d486b",
+            "name": "https://app-pruebaelaniin.herokuapp.com/produtos/9",
+            "url": "https://app-pruebaelaniin.herokuapp.com/produtos/9",
+            "time": 118,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                118
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "f3d36467-6b15-43d1-baae-10e96b5a3795",
+            "name": "https://app-pruebaelaniin.herokuapp.com/produtos/filter?sku=&nombre=mo",
+            "url": "https://app-pruebaelaniin.herokuapp.com/produtos/filter?sku=&nombre=mo",
+            "time": 143,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                143
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "25fbecda-a9cc-4add-9069-a759a30fea60",
+            "name": "https://app-pruebaelaniin.herokuapp.com/recuperarcontrasenia/?email=jorge.p.391@gmail.com",
+            "url": "https://app-pruebaelaniin.herokuapp.com/recuperarcontrasenia/?email=jorge.p.391@gmail.com",
+            "time": 1281,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                1281
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "9235b87d-35e3-4ca3-a720-3b5237e03525",
+            "name": "https://app-pruebaelaniin.herokuapp.com/confirmarcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w",
+            "url": "https://app-pruebaelaniin.herokuapp.com/confirmarcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w",
+            "time": 126,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                126
+            ],
+            "allTests": [
+                {}
+            ]
+        },
+        {
+            "id": "60e08a66-1d84-48ce-bffe-8e56f8356322",
+            "name": "https://app-pruebaelaniin.herokuapp.com/resetcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w&contrasenia=$2a$10$IvFz3E67hTOAiRKYH/KlKe1vwbCL4gK3QZsWgxLXXeB/VTR3tBOC.",
+            "url": "https://app-pruebaelaniin.herokuapp.com/resetcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w&contrasenia=$2a$10$IvFz3E67hTOAiRKYH/KlKe1vwbCL4gK3QZsWgxLXXeB/VTR3tBOC.",
+            "time": 115,
+            "responseCode": {
+                "code": 200,
+                "name": "OK"
+            },
+            "tests": {},
+            "testPassFailCounts": {},
+            "times": [
+                115
+            ],
+            "allTests": [
+                {}
+            ]
+        }
+    ],
+    "count": 1,
+    "totalTime": 3123,
+    "collection": {
+        "requests": [
+            {
+                "id": "ed3da552-4384-44c1-9a7e-880c83b73b1f",
+                "method": "POST"
+            },
+            {
+                "id": "c447cebf-0109-407b-8e27-1898e18257e3",
+                "method": "GET"
+            },
+            {
+                "id": "8677f0a6-a62a-46b2-b600-5e1aec304fa7",
+                "method": "PUT"
+            },
+            {
+                "id": "69f18185-de4e-4a23-ab1b-3bb00593cd9c",
+                "method": "POST"
+            },
+            {
+                "id": "4479839c-9cc1-4f94-ba35-bae7c940e6f1",
+                "method": "DELETE"
+            },
+            {
+                "id": "c02282ff-f80d-4402-8532-b936379be375",
+                "method": "GET"
+            },
+            {
+                "id": "ec89822d-d665-4372-b962-c10c221b550d",
+                "method": "PUT"
+            },
+            {
+                "id": "64878ade-f77f-4a3d-8e77-0e049618723f",
+                "method": "POST"
+            },
+            {
+                "id": "c7f5964e-258e-47e2-912d-0e513c0d486b",
+                "method": "DELETE"
+            },
+            {
+                "id": "f3d36467-6b15-43d1-baae-10e96b5a3795",
+                "method": "GET"
+            },
+            {
+                "id": "25fbecda-a9cc-4add-9069-a759a30fea60",
+                "method": "POST"
+            },
+            {
+                "id": "9235b87d-35e3-4ca3-a720-3b5237e03525",
+                "method": "GET"
+            },
+            {
+                "id": "60e08a66-1d84-48ce-bffe-8e56f8356322",
+                "method": "POST"
+            }
+        ]
+    }
+}

@@ -1,0 +1,569 @@
+{
+    "info": {
+        "_postman_id": "f6948c47-15ce-4e9d-bc33-e63318a04929",
+        "name": "PruebaElaniin",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Login",
+            "protocolProfileBehavior": {
+                "followOriginalHttpMethod": true,
+                "followAuthorizationHeader": true,
+                "removeRefererHeaderOnRedirect": true,
+                "disableCookies": true,
+                "tlsPreferServerCiphers": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "",
+                        "value": "",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"mail\":\"jorge.p.391@gmail.com\",\r\n    \"password\":\"PruebaPassword\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/login",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "login"
+                    ]
+                },
+                "description": "Obtiene token"
+            },
+            "response": [
+                {
+                    "name": "Login",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "",
+                                "value": "",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"mail\":\"jorge.p.391@gmail.com\",\r\n    \"password\":\"PruebaPassword\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://app-pruebaelaniin.herokuapp.com/login",
+                            "protocol": "https",
+                            "host": [
+                                "app-pruebaelaniin",
+                                "herokuapp",
+                                "com"
+                            ],
+                            "path": [
+                                "login"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "header": [
+                        {
+                            "key": "Server",
+                            "value": "Cowboy"
+                        },
+                        {
+                            "key": "Connection",
+                            "value": "keep-alive"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Origin"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Access-Control-Request-Method"
+                        },
+                        {
+                            "key": "Vary",
+                            "value": "Access-Control-Request-Headers"
+                        },
+                        {
+                            "key": "X-Content-Type-Options",
+                            "value": "nosniff"
+                        },
+                        {
+                            "key": "X-Xss-Protection",
+                            "value": "1; mode=block"
+                        },
+                        {
+                            "key": "Cache-Control",
+                            "value": "no-cache, no-store, max-age=0, must-revalidate"
+                        },
+                        {
+                            "key": "Pragma",
+                            "value": "no-cache"
+                        },
+                        {
+                            "key": "Expires",
+                            "value": "0"
+                        },
+                        {
+                            "key": "Strict-Transport-Security",
+                            "value": "max-age=31536000 ; includeSubDomains"
+                        },
+                        {
+                            "key": "X-Frame-Options",
+                            "value": "DENY"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        },
+                        {
+                            "key": "Transfer-Encoding",
+                            "value": "chunked"
+                        },
+                        {
+                            "key": "Date",
+                            "value": "Sat, 11 Apr 2020 23:33:19 GMT"
+                        },
+                        {
+                            "key": "Via",
+                            "value": "1.1 vegur"
+                        }
+                    ],
+                    "cookie": [],
+                    "body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjY0Nzk5OSwiZXhwIjoxNTg3MjUyNzk5fQ.bNiudnLK-6E1LflCkNXz0RTJkO-C74C-bTsNcct-w3U\"\n}"
+                }
+            ]
+        },
+        {
+            "name": "ObtenerUsuarios",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjY0NTgyNSwiZXhwIjoxNTg3MjUwNjI1fQ.J5y-6LL-ZCLgznRgxRq0s9VOzRTSLa0K40kYdvE1iUg",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/usuarios?limit=2&page=0",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "usuarios"
+                    ],
+                    "query": [
+                        {
+                            "key": "limit",
+                            "value": "2"
+                        },
+                        {
+                            "key": "page",
+                            "value": "0"
+                        }
+                    ]
+                },
+                "description": "Obtiene la informacion de los usuarios en paginado"
+            },
+            "response": []
+        },
+        {
+            "name": "ActualizarUsuario",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjY0NTgyNSwiZXhwIjoxNTg3MjUwNjI1fQ.J5y-6LL-ZCLgznRgxRq0s9VOzRTSLa0K40kYdvE1iUg",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n        \"id\": 1,\r\n        \"nombre\": \"Jorge Peña\",\r\n        \"telefono\": \"70464553\",\r\n        \"username\": \"jpena\",\r\n        \"email\": \"jorge.p.391@gmail.com\",\r\n        \"password\": \"$2a$10$8jfDORN4XBTJnSz9vzJMH.O1w7djWQ2PaXJEypTiH6nyfKn8BP8Lu\",\r\n        \"fechaNacimiento\": \"1995-05-22\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/usuarios/",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "usuarios",
+                        ""
+                    ]
+                },
+                "description": "Atualizar informacion del cliente"
+            },
+            "response": []
+        },
+        {
+            "name": "AgregarUsuario",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n        \"id\": 4,\r\n        \"nombre\": \"Jorge Peña\",\r\n        \"telefono\": \"70464553\",\r\n        \"username\": \"jpe2\",\r\n        \"email\": \"jorge2@gmail.com\",\r\n        \"password\": \"$2a$10$8jfDORN4XBTJnSz9vzJMH.O1w7djWQ2PaXJEypTiH6nyfKn8BP8Lu\",\r\n        \"fechaNacimiento\": \"1995-05-22\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/usuarios",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "usuarios"
+                    ]
+                },
+                "description": "Agregar usuarios"
+            },
+            "response": []
+        },
+        {
+            "name": "EliminarUsuario",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjY0NTgyNSwiZXhwIjoxNTg3MjUwNjI1fQ.J5y-6LL-ZCLgznRgxRq0s9VOzRTSLa0K40kYdvE1iUg",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/usuarios/15",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "usuarios",
+                        "15"
+                    ]
+                },
+                "description": "Eliminar usuario"
+            },
+            "response": []
+        },
+        {
+            "name": "ObtenerProducto",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/produtos?page=0&limit=10",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "produtos"
+                    ],
+                    "query": [
+                        {
+                            "key": "page",
+                            "value": "0"
+                        },
+                        {
+                            "key": "limit",
+                            "value": "10"
+                        }
+                    ]
+                },
+                "description": "Listar productos"
+            },
+            "response": []
+        },
+        {
+            "name": "ActualizarProducto",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n        \"sku\": \"12-0\",\r\n        \"nombre\": \"MOUSE LC55\",\r\n        \"cantidad\": 100,\r\n        \"precio\": 25.36,\r\n        \"descripcion\": \"Mouse inalambrico\",\r\n        \"imagen\": \"imagen/1523566.jpg\",\r\n        \"id\":7\r\n    }",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/produtos",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "produtos"
+                    ]
+                },
+                "description": "Actualizar informacion de producto"
+            },
+            "response": []
+        },
+        {
+            "name": "AgregarProducto",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n        \"sku\": \"12-0\",\r\n        \"nombre\": \"MOUSE LC55\",\r\n        \"cantidad\": 100,\r\n        \"precio\": 25.36,\r\n        \"descripcion\": \"Mouse inalambrico\",\r\n        \"imagen\": \"imagen/1523566.jpg\"\r\n    }",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/produtos",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "produtos"
+                    ]
+                },
+                "description": "Agregar nuevo producto"
+            },
+            "response": []
+        },
+        {
+            "name": "EliminarProducto",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/produtos/9",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "produtos",
+                        "9"
+                    ]
+                },
+                "description": "Eliminar producto"
+            },
+            "response": []
+        },
+        {
+            "name": "FiltrarProducto",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJzY29wZXMiOiJST0xFX0FETSIsImlhdCI6MTU4NjU0Mzc2MywiZXhwIjoxNTg3MTQ4NTYzfQ.0CZr8UXUZnSNws-Z5raN_KHFOU14EFP6tPZka9k10_w",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/produtos/filter?sku=&nombre=mo",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "produtos",
+                        "filter"
+                    ],
+                    "query": [
+                        {
+                            "key": "sku",
+                            "value": ""
+                        },
+                        {
+                            "key": "nombre",
+                            "value": "mo"
+                        }
+                    ]
+                },
+                "description": "Filtrar producto por SKU y nombre"
+            },
+            "response": []
+        },
+        {
+            "name": "RecuperarContraseña",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/recuperarcontrasenia/?email=jorge.p.391@gmail.com",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "recuperarcontrasenia",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "email",
+                            "value": "jorge.p.391@gmail.com"
+                        }
+                    ]
+                },
+                "description": "Envio de correo con link para recuperar contraseña"
+            },
+            "response": []
+        },
+        {
+            "name": "ValidarLink",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/confirmarcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "confirmarcontrasenia",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "token",
+                            "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w"
+                        }
+                    ]
+                },
+                "description": "Validar token de correo para acceder al link"
+            },
+            "response": []
+        },
+        {
+            "name": "ActualizarContraseña",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "https://app-pruebaelaniin.herokuapp.com/resetcontrasenia/?token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w&contrasenia=$2a$10$IvFz3E67hTOAiRKYH/KlKe1vwbCL4gK3QZsWgxLXXeB/VTR3tBOC.",
+                    "protocol": "https",
+                    "host": [
+                        "app-pruebaelaniin",
+                        "herokuapp",
+                        "com"
+                    ],
+                    "path": [
+                        "resetcontrasenia",
+                        ""
+                    ],
+                    "query": [
+                        {
+                            "key": "token",
+                            "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb3JnZS5wLjM5MUBnbWFpbC5jb20iLCJleHAiOjE1ODY2NDc3OTR9.F-GS8eZO_gbD7ZxOaX02H9j8-HyXkno9lEeafBGRvM4M2UlV6sgsEzzuwwtJu1dQNhsrLXnzlDiqaVHAVnrK8w"
+                        },
+                        {
+                            "key": "contrasenia",
+                            "value": "$2a$10$IvFz3E67hTOAiRKYH/KlKe1vwbCL4gK3QZsWgxLXXeB/VTR3tBOC."
+                        }
+                    ]
+                },
+                "description": "Validacion de token y actualizacion de contraseña"
+            },
+            "response": []
+        }
+    ],
+    "protocolProfileBehavior": {}
+}
