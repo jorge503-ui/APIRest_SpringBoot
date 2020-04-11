@@ -6,7 +6,7 @@ Se puede realizar un tets mediante Postman, se ubica en `/src/main/resources/req
 
 ## Funcionalidades
 * Login
-* Catalogo de productos y usuarios
+* Catalogo de productos y usuarios (Paginacion)
 * Actualizacion de productos y usuarios
 * Eliminar productos y usuarios
 * agregar productos y usuarios
@@ -34,10 +34,10 @@ Es por medio de POST, se puede acceder por
 * Apache Netbeans IDE 11.3
 * Maven 4.0.0
 * Spring Boot 2.2.4
-* MySQL  9.5
+* MySQL  5.5
 
 ## Instalaccion
-* Crear la BDD cPvkQ1lTKU
-* Importar el script sql que esta en: /src/main/resources/database
+* Crear la BDD sql9332796
+* Importar el script sql q ue esta en: /src/main/resources/database
 * Agregar el proyecto a Apache Netbeans
 * Inicar SpringBoot Application
