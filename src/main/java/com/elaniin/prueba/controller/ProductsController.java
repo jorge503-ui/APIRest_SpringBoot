@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 /**
@@ -31,14 +32,24 @@ public class ProductsController extends BaseRestController{
 
     /**
      * Add a new produto endpoint
-     * @param produtos
+     * @param produto
      * @return
      */
     @PostMapping(value = "produtos", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> addProducto(@RequestBody Producto produto) {
-        return generateResponseOk(productServices.addProducto(produto));
+        Map<String, Object> hasmap = new HashMap<>();        
+        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad() != 0 && produto.getPrecio() != 0.0){
+            generateResponseOk(productServices.addProducto(produto));
+            hasmap.put("status", true);
+            hasmap.put("message", "Producto agregado exitosamente");
+        }else{
+            hasmap.put("status", false);
+            hasmap.put("message", "Hay campos obligatorios vacios, favor validar.");
+        }
+        
+        return generateResponseOk(hasmap);
     }
 
     /**
@@ -50,18 +61,31 @@ public class ProductsController extends BaseRestController{
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> updateProducto(@RequestBody Producto produto) {
-        return generateResponseOk(productServices.addProducto(produto));
+        Map<String, Object> hasmap = new HashMap<>();        
+        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad() != 0 && produto.getPrecio() != 0.0){
+            generateResponseOk(productServices.updateProducto(produto));
+            hasmap.put("status", true);
+            hasmap.put("message", "Producto agregado exitosamente");
+        }else{
+            hasmap.put("status", false);
+            hasmap.put("message", "Hay campos obligatorios vacios, favor validar.");
+        }
+        
+        return generateResponseOk(hasmap);
     }
 
     /**
      * Return all data
+     * @param page
+     * @param limit
      * @return
      */
     @GetMapping(value = "produtos", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
-    public ResponseEntity<?> allProductos() {
-        return generateResponseOk(productServices.allProducto());
+    public ResponseEntity<?> allProductos(@RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "limit", defaultValue = "30") int limit) {
+        return generateResponseOk(productServices.allProducto(page, limit));
     }
 
     /**
@@ -74,7 +98,7 @@ public class ProductsController extends BaseRestController{
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> deleteProductos(@PathVariable(name = "id") int id) {
         productServices.deleteProducto(id);
-        Map<String, Object> hasmap = new HashMap<String, Object>();
+        Map<String, Object> hasmap = new HashMap<>();
         hasmap.put("status",true);
         hasmap.put("message","Produto eliminado exitosamente");
         return generateResponseOk(hasmap);

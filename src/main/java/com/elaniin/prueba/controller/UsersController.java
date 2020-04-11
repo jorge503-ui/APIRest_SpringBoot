@@ -6,8 +6,12 @@
 package com.elaniin.prueba.controller;
 
 import com.elaniin.prueba.helper.BaseRestController;
+import com.elaniin.prueba.helper.Utilidades;
 import com.elaniin.prueba.model.Usuario;
 import com.elaniin.prueba.service.UserService;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.mail.SimpleMailMessage;
@@ -33,39 +38,77 @@ public class UsersController extends BaseRestController{
 
     @Autowired
     private JavaMailSender mailSender;
+    
+    Utilidades utils = new Utilidades();
     /**
      * Add a new usuarios endpoint
-     * @param usuarios
+     * @param user
      * @return
      */
     @PostMapping(value = "usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
+    @ExceptionHandler(SQLException.class)
     public ResponseEntity<?> addUsuario(@RequestBody Usuario user) {
-        return generateResponseOk(userService.addUsuario(user));
+        Map<String, Object> hasmap = new HashMap<>();
+        String result = "";
+        try {
+            if (utils.isNumeric(user.getTelefono())) {
+                generateResponseOk(userService.addUsuario(user));
+                hasmap.put("status", true);
+                hasmap.put("message", "Usuario agregado exitosamente");
+            } else {
+                hasmap.put("status", false);
+                hasmap.put("message", "Telefono no valido, debe ser numerico");
+            }
+        } catch (Exception e) {
+            hasmap.put("status", false);
+            hasmap.put("message", "No se guardo usuario favor validar, error " + e.getMessage());
+        }
+
+        return generateResponseOk(hasmap);
     }
 
     /**
      * Update a usuarios
-     * @param usuarios
+     * @param user
      * @return
      */
     @PutMapping(value = "usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> updateUsuario(@RequestBody Usuario user) {
-        return generateResponseOk(userService.updateUsuario(user));
+        Map<String, Object> hasmap = new HashMap<>();
+        String result = "";
+        try {
+            if (utils.isNumeric(user.getTelefono())) {
+                generateResponseOk(userService.updateUsuario(user));
+                hasmap.put("status", true);
+                hasmap.put("message", "Usuario agregado exitosamente");
+            } else {
+                hasmap.put("status", false);
+                hasmap.put("message", "Telefono no valido, debe ser numerico");
+            }
+        } catch (Exception e) {
+            hasmap.put("status", false);
+            hasmap.put("message", "No se guardo usuario favor validar, error " + e.getMessage());
+        }
+
+        return generateResponseOk(hasmap);
     }
 
     /**
      * Return all data
+     * @param page
+     * @param limit
      * @return
      */
     @GetMapping(value = "usuarios", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
-    public ResponseEntity<?> allUsuario() {
-        return generateResponseOk(userService.allUsuario());
+    public ResponseEntity<?> allUsuario(@RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "limit", defaultValue = "30") int limit) {
+        return generateResponseOk(userService.allUsuario(page, limit));
     }
 
     /**
@@ -78,7 +121,7 @@ public class UsersController extends BaseRestController{
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> deleteUsuarios(@PathVariable(name = "id") int id) {
         userService.deleteUsuario(id);
-        Map<String, Object> hasmap = new HashMap<String, Object>();
+        Map<String, Object> hasmap = new HashMap<>();
         hasmap.put("status",true);
         hasmap.put("message","Usuario eliminado exitosamente");
         return generateResponseOk(hasmap);
@@ -93,7 +136,7 @@ public class UsersController extends BaseRestController{
     @ResponseBody
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> recuperarContrasenia(@PathVariable(name = "email") String email) {
-        Map<String, Object> hasmap = new HashMap<String, Object>();
+        Map<String, Object> hasmap = new HashMap<>();
         SimpleMailMessage emailMessage = new SimpleMailMessage();
         Usuario usuario = new Usuario();
         usuario = userService.findByEmail(email);

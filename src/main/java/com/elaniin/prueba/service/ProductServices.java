@@ -17,4 +17,5 @@ public interface ProductServices {
     List<Producto> allProducto();
     List<Producto> allProducto(String title);
     void deleteProducto(Integer id);
+    List<Producto> allProducto(int page, int limit);
 }

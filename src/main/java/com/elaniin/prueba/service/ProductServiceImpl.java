@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 /**
  *
  * @author Jorgep503
@@ -53,7 +56,15 @@ public class ProductServiceImpl implements ProductServices{
 
     @Override
     public void deleteProducto(Integer id) {
-        productRepository.deleteById(id);
+        productRepository.deleteById(id.longValue());
+    }
+
+    @Override
+    public List<Producto> allProducto(int page, int limit) {
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Producto> productos = productRepository.findAll(pageableRequest);
+        List<Producto> productEntities = productos.getContent();
+        return productEntities;
     }
     
 }

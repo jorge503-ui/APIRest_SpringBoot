@@ -50,16 +50,16 @@ public class Usuario implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "telefono")
-    private BigInteger telefono;
+    private String telefono;
     @Size(max = 50)
-    @Column(name = "username")
+    @Column(name = "username",unique = true)
     private String username;
     @Column(name = "fechanacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechanacimiento;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 100)
-    @Column(name = "email")
+    @Column(name = "email",unique = true)
     private String email;
     @Size(max = 100)
     @Column(name = "password")
@@ -88,11 +88,11 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigInteger getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(BigInteger telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

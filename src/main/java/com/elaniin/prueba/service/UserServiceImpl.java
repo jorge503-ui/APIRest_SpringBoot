@@ -7,7 +7,6 @@ package com.elaniin.prueba.service;
 import com.elaniin.prueba.dao.UserRepository;
 import com.elaniin.prueba.model.Usuario;
 import java.util.ArrayList;
-import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 /**
  *
@@ -65,18 +67,9 @@ public class UserServiceImpl implements UserDetailsService, UserService{
         return usuario;
     }
 
-//    @Override
-//    public List<Usuario> allUsuario(String name) {
-//        List<Usuario> usuario=new ArrayList<>();
-//        for (usuario meeting:userRepository.fin(name)) {
-//            usuario.add(meeting);
-//        }
-//        return usuario;
-//    }
-
     @Override
     public void deleteUsuario(Integer id) {
-        userRepository.deleteById(id);
+        userRepository.deleteById(id.longValue());
     }
 
     @Override
@@ -89,6 +82,14 @@ public class UserServiceImpl implements UserDetailsService, UserService{
         Usuario user = new Usuario();
                user = userRepository.findByEmail(email).orElse(user);
 	return user;
+    }
+
+    @Override
+    public List<Usuario> allUsuario(int page, int limit) {
+        Pageable pageableRequest = PageRequest.of(page, limit);
+        Page<Usuario> users = userRepository.findAll(pageableRequest);
+        List<Usuario> userEntities = users.getContent();
+        return userEntities;
     }
     
 }

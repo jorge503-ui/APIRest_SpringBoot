@@ -6,16 +6,15 @@
 package com.elaniin.prueba.dao;
 
 import com.elaniin.prueba.model.Producto;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  *
  * @author Jorgep503
  */
-public interface ProductRepository extends CrudRepository<Producto, Integer>{
+public interface ProductRepository extends PagingAndSortingRepository<Producto, Long>{
     
     List<Producto> findByParamLike(@Param("parametro") String parametro);
 }
