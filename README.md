@@ -34,10 +34,10 @@ Es por medio de POST, se puede acceder por
 * Apache Netbeans IDE 11.3
 * Maven 4.0.0
 * Spring Boot 2.2.4
-* MySQL  5.5
+* Oracle 12c
 
 ## Instalaccion
-* Crear la BDD sql9332796
-* Importar el script sql q ue esta en: /src/main/resources/database
+* Crear la BDD PRUEBAELANIIN
+* Importar el script sql que esta en: /src/main/resources/database
 * Agregar el proyecto a Apache Netbeans
 * Inicar SpringBoot Application
