@@ -6,7 +6,6 @@
 package com.elaniin.prueba.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,9 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,43 +28,46 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jorgep503
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
     @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
     @NamedQuery(name = "Usuario.findByNombre", query = "SELECT u FROM Usuario u WHERE u.nombre = :nombre"),
-    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono"),
     @NamedQuery(name = "Usuario.findByUsername", query = "SELECT u FROM Usuario u WHERE u.username = :username"),
-    @NamedQuery(name = "Usuario.findByFechaNacimiento", query = "SELECT u FROM Usuario u WHERE u.fechanacimiento = :fechanacimiento"),
+    @NamedQuery(name = "Usuario.findByFechanacimiento", query = "SELECT u FROM Usuario u WHERE u.fechanacimiento = :fechanacimiento"),
     @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
+    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
+    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_USUARIO")
+    @SequenceGenerator(sequenceName = "SEQ_USUARIO", allocationSize = 1, name = "SEQ_USUARIO")
+    @Column(name = "ID")
     private Integer id;
     @Size(max = 150)
-    @Column(name = "nombre")
+    @Column(name = "NOMBRE")
     private String nombre;
-    @Column(name = "telefono")
-    private String telefono;
     @Size(max = 50)
-    @Column(name = "username",unique = true)
+    @Column(name = "USERNAME")
     private String username;
-    @Column(name = "fechanacimiento")
-    @Temporal(TemporalType.DATE)
+    @Column(name = "FECHANACIMIENTO")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechanacimiento;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 100)
-    @Column(name = "email",unique = true)
+    @Column(name = "EMAIL")
     private String email;
     @Size(max = 100)
-    @Column(name = "password")
+    @Column(name = "PASSWORD")
     private String password;
+    @Size(max = 20)
+    @Column(name = "TELEFONO")
+    private String telefono;
 
     public Usuario() {
     }
@@ -88,14 +92,6 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -104,12 +100,12 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public Date getFechaNacimiento() {
+    public Date getFechanacimiento() {
         return fechanacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechanacimiento = fechaNacimiento;
+    public void setFechanacimiento(Date fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
     }
 
     public String getEmail() {
@@ -126,6 +122,14 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     @Override

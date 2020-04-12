@@ -39,7 +39,7 @@ public class ProductsController extends BaseRestController{
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> addProducto(@RequestBody Producto produto) {
         Map<String, Object> hasmap = new HashMap<>();        
-        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad() != 0 && produto.getPrecio() != 0.0){
+        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad().intValue() != 0 && produto.getPrecio().doubleValue() != 0.0){
             generateResponseOk(productServices.addProducto(produto));
             hasmap.put("status", true);
             hasmap.put("message", "Producto agregado exitosamente");
@@ -61,7 +61,7 @@ public class ProductsController extends BaseRestController{
     @PreAuthorize("hasRole('ADM')")
     public ResponseEntity<?> updateProducto(@RequestBody Producto produto) {
         Map<String, Object> hasmap = new HashMap<>();        
-        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad() != 0 && produto.getPrecio() != 0.0){
+        if(produto.getNombre() !=null && !produto.getNombre().isEmpty() && produto.getCantidad().intValue() != 0 && produto.getPrecio().doubleValue() != 0.0){
             generateResponseOk(productServices.updateProducto(produto));
             hasmap.put("status", true);
             hasmap.put("message", "Producto actualizado exitosamente");

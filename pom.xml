@@ -18,7 +18,13 @@
         <java.version>1.8</java.version>
         <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
     </properties>
-
+<repositories>
+    <repository>
+        <id>hand-china-repo</id>
+        <name>HandChinaRepo</name>
+        <url>http://nexus.saas.hand-china.com/content/repositories/rdc/</url>
+    </repository>
+</repositories>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -47,6 +53,11 @@
             <artifactId>ojdbc8</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+    <groupId>com.oracle</groupId>
+    <artifactId>ojdbc7</artifactId>
+    <version>12.1.0.2</version>
+</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
