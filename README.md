@@ -37,7 +37,7 @@ Es por medio de POST, se puede acceder por
 * Oracle 12c
 
 ## Instalaccion
-* Crear la BDD, usar una ya existente solamente verificar que el usuario tenga permisos al esquema que donde se importara el script sql
-* Importar el script sql q ue esta en: /src/main/resources/database
+* Crear la BDD PRUEBAELANIIN
+* Importar el script sql que esta en: /src/main/resources/database
 * Agregar el proyecto a Apache Netbeans
 * Inicar SpringBoot Application
